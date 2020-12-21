@@ -1,0 +1,20 @@
+import java.util.HashMap;
+public class Solution {
+	public static String solution(String x){
+		char[] key = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+		char[] value = "zyxwvutsrqponmlkjihgfedcba".toCharArray();
+		HashMap<Character, Character> charMap = new HashMap<>(); 
+		for(int i=0;i<key.length;i++){charMap.put(key[i],value[i]);}			
+		char[] enc = x.toCharArray();		
+		for(int j=0;j<enc.length;j++){
+			if(charMap.containsKey(enc[j]))
+				enc[j] =  charMap.get(enc[j]);}
+		return new String(enc);
+	}
+	public static void main(String args[])
+	{
+		String s = "Yvzs! I xzm'g yvorvev Lzmxv olhg srh qly zg gsv xlolmb!!"; 
+		String encrypt = solution(s);		
+		System.out.println(encrypt);
+	}
+}
