@@ -1,0 +1,54 @@
+package com.google.foobar;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Level2Optim {
+	public static void main(String[] args)
+	{
+		int[] arr = {3,1,4,1,5,9};
+		solution(arr); 
+	}	
+	public static int solution(int[] l) 
+	{
+		int[] arrDesc = Arrays.stream(l).boxed().sorted(Collections.reverseOrder()).mapToInt(Integer::intValue).toArray();
+		l = arrDesc;
+		for (int i=l.length;i>=1;i--){
+			int data[]=new int[i];
+			cmb(l, data, 0, l.length-1, 0, i);
+		}
+		return 0;
+	}	
+	public static int cmb(int arr[], int data[], int start,int end, int index, int r){ 
+		int result = 0;
+		if (index == r){int sum=0;ArrayList<Integer> comb = new ArrayList<Integer>() ;
+			StringBuilder sb = new StringBuilder();	
+			for (int j=0; j<r; j++) 
+			{
+				comb.add(data[j]);
+				sb.append(data[j]);
+			}
+			for (int i: comb){
+				sum += i;
+		    }
+			if (sum % 3 == 0)
+			{	
+				StringBuilder strNum = new StringBuilder();
+				for (int num : comb){
+				     strNum.append(num);
+				}
+				result= Integer.parseInt(strNum.toString());
+				System.out.println(result);
+				System.exit(0);
+			}
+			return result;
+		}		
+		for (int i=start; i<=end && end-i+1 >= r-index; i++) 
+		{ 
+			data[index] = arr[i];			
+			cmb(arr, data, i+1, end, index+1, r); 
+		}
+		return result; 
+	}
+}
